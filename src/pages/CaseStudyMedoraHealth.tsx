@@ -1,9 +1,9 @@
 // src/pages/CaseStudyAmbientAI.tsx
 import { useState, useEffect } from "react";
-import { ArrowDown, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import AnimatedSection from "@/components/AnimatedSection";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import Logo                   from "@/Images/MedoraHealthLogo.svg";
 
@@ -173,11 +173,16 @@ const CaseStudyAmbientAI = () => {
 
             {/* ── Overview Illustration */}
             <div className="fade-in-section opacity-0 translate-y-6 mb-16">
-              <img
+              {/* <img
                 src={OverviewImg}
                 alt="Illustration of clinician using ambient AI device"
                 className="w-full rounded-2xl shadow-sm"
-              />
+              /> */}
+               <LazyLoadImage
+                   src={OverviewImg}
+                   alt=""
+          
+                   className="w-full object-cover rounded-2xl shadow-sm" />
             </div>
 
             {/* ── The Problem */}

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import AnimatedSection from "@/components/AnimatedSection";
+import owais from "@/Images/AmbientImg.svg";
 
 const About = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
