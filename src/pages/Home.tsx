@@ -34,10 +34,6 @@ const Home = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const openResume = () => {
-    window.open("/resume.pdf", "_blank");
-  };
-
   return (
     <div className="min-h-screen bg-white font-switzer">
       <Navbar />
@@ -106,16 +102,12 @@ const Home = () => {
                 Back to top ↑
               </button>
             </AnimatedSection>
+
+            {/* hidden on mobile, shown md+ */}
             <AnimatedSection delay={400}>
-              <span>MADE WITH ❤️ AND ☕ IN 🇺🇸 🇨🇦</span>
-            </AnimatedSection>
-            <AnimatedSection delay={600}>
-              <button
-                onClick={openResume}
-                className="hover:text-heading transition-colors cursor-pointer"
-              >
-                Resume →
-              </button>
+              <span className="hidden md:inline">
+                MADE WITH ❤️ AND ☕ IN 🇺🇸 🇨🇦
+              </span>
             </AnimatedSection>
           </div>
         </div>
@@ -143,7 +135,7 @@ const CaseStudyCard = ({ study }: CaseStudyCardProps) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Image card (taller now) */}
+        {/* Image card */}
         <div className="relative rounded-2xl overflow-hidden shadow-lg">
           <div
             className="h-[40rem] w-full bg-cover bg-center"

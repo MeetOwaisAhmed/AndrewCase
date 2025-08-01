@@ -1,7 +1,13 @@
+// src/pages/About.tsx
+
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import AnimatedSection from "@/components/AnimatedSection";
-import owais from "@/Images/AmbientImg.svg";
+import PersonalPhotoOne from "@/Images/FarLeft.jpeg";
+import PersonalPhotoTwo from "@/Images/LeftOfCenter.jpeg";
+import MainPhoto from "@/Images/Center.jpeg";
+import PersonalPhotoFour from "@/Images/RightOfCenter.jpeg";
+import PersonalPhotoFive from "@/Images/FarRight.jpg";
 
 const About = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
@@ -16,174 +22,162 @@ const About = () => {
       },
       { threshold: 0.3 }
     );
-
-    if (picturesRef.current) {
-      observer.observe(picturesRef.current);
-    }
-
+    if (picturesRef.current) observer.observe(picturesRef.current);
     return () => {
-      if (picturesRef.current) {
-        observer.unobserve(picturesRef.current);
-      }
+      if (picturesRef.current) observer.unobserve(picturesRef.current);
     };
   }, [animationStarted]);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  const openResume = () => {
-    window.open('/resume.pdf', '_blank');
-  };
+  const scrollToTop = () =>
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <div className="min-h-screen bg-white font-switzer">
       <Navbar />
-      
+
       {/* About Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
-          {/* Five Pictures with Staggered Animation */}
+
+          {/* Five Photos */}
           <div ref={picturesRef} className="mb-16">
-            <div className="flex justify-center items-center gap-4 mb-8 relative">
-              {/* Picture 1 */}
-              <div 
-                className={`w-32 h-40 bg-gray-200 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
-                  animationStarted 
-                    ? 'opacity-100 translate-y-0 translate-x-0' 
-                    : 'opacity-0 translate-y-5 translate-x-0'
+            <div
+              className="
+                flex 
+                flex-col      /* stack on mobile */
+                md:flex-row   /* row on md+ */
+                items-center 
+                md:justify-center 
+                gap-y-4       /* vertical gap on mobile */
+                md:gap-y-0 
+                md:gap-x-4    /* horizontal gap on md+ */
+                mb-8
+                relative
+              "
+            >
+              {/* Far Left */}
+              <div
+                className={`w-40 h-52 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
+                  animationStarted
+                    ? "opacity-100 translate-y-0 rotate-[-5deg] md:-translate-x-14"
+                    : "opacity-0 translate-y-5"
                 }`}
-                style={{ 
-                  transitionDelay: animationStarted ? '0ms' : '0ms',
-                  transform: animationStarted 
-                    ? 'translateY(0px) translateX(-60px) rotate(-5deg)' 
-                    : 'translateY(20px) translateX(0px) rotate(0deg)'
-                }}
+                style={{ transitionDelay: animationStarted ? "0ms" : "0ms" }}
               >
-                <img 
-                  src="/lovable-uploads/41ee9c2c-d3df-4dd8-b3e2-24e3d93e0776.png" 
-                  alt="Personal photo 1" 
-                  className="w-full h-full object-cover"
+                <img
+                  src={PersonalPhotoOne}
+                  alt="Far left portrait"
+                  className="w-full h-full object-contain rounded-lg"
                 />
               </div>
-              
-              {/* Picture 2 */}
-              <div 
-                className={`w-28 h-36 bg-gray-200 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
-                  animationStarted 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-5'
+
+              {/* Left of Center */}
+              <div
+                className={`w-36 h-48 overflow-hidden rounded-lg transition-all duration-700 ease-out ${
+                  animationStarted
+                    ? "opacity-100 translate-y-0 rotate-3 md:-translate-x-6"
+                    : "opacity-0 translate-y-5"
                 }`}
-                style={{ 
-                  transitionDelay: animationStarted ? '100ms' : '0ms',
-                  transform: animationStarted 
-                    ? 'translateY(-20px) translateX(-30px) rotate(3deg)' 
-                    : 'translateY(20px) translateX(0px) rotate(0deg)'
-                }}
+                style={{ transitionDelay: animationStarted ? "100ms" : "0ms" }}
               >
-                <img 
-                  src="/lovable-uploads/7fad426d-ac95-4057-aeb5-7807e1e83c8c.png" 
-                  alt="Personal photo 2" 
-                  className="w-full h-full object-cover"
+                <img
+                  src={PersonalPhotoTwo}
+                  alt="Left of center portrait"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
-              
-              {/* Picture 3 - Center (main) */}
-              <div 
-                className={`w-36 h-44 bg-gray-200 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
-                  animationStarted 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-5'
+
+              {/* Center */}
+              <div
+                className={`w-44 h-56 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
+                  animationStarted
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-5"
                 }`}
-                style={{ 
-                  transitionDelay: animationStarted ? '200ms' : '0ms',
-                  transform: animationStarted 
-                    ? 'translateY(-10px) translateX(0px) rotate(0deg)' 
-                    : 'translateY(20px) translateX(0px) rotate(0deg)'
-                }}
+                style={{ transitionDelay: animationStarted ? "200ms" : "0ms" }}
               >
-                <div className="w-full h-full bg-gradient-to-br from-blue-400 to-green-400 flex items-center justify-center text-white">
-                  <span className="text-sm font-medium">Main Photo</span>
-                </div>
+                <img
+                  src={MainPhoto}
+                  alt="Center headshot"
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
-              
-              {/* Picture 4 */}
-              <div 
-                className={`w-28 h-36 bg-gray-200 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
-                  animationStarted 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-5'
+
+              {/* Right of Center */}
+              <div
+                className={`w-36 h-48 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
+                  animationStarted
+                    ? "opacity-100 translate-y-0 rotate-[-3deg] md:translate-x-6"
+                    : "opacity-0 translate-y-5"
                 }`}
-                style={{ 
-                  transitionDelay: animationStarted ? '300ms' : '0ms',
-                  transform: animationStarted 
-                    ? 'translateY(-15px) translateX(30px) rotate(-3deg)' 
-                    : 'translateY(20px) translateX(0px) rotate(0deg)'
-                }}
+                style={{ transitionDelay: animationStarted ? "300ms" : "0ms" }}
               >
-                <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white">
-                  <span className="text-xs font-medium">Photo 4</span>
-                </div>
+                <img
+                  src={PersonalPhotoFour}
+                  alt="Right of center portrait"
+                  className="w-full h-full object-contain rounded-lg"
+                />
               </div>
-              
-              {/* Picture 5 */}
-              <div 
-                className={`w-32 h-40 bg-gray-200 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
-                  animationStarted 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-5'
+
+              {/* Far Right */}
+              <div
+                className={`w-40 h-52 rounded-lg overflow-hidden transition-all duration-700 ease-out ${
+                  animationStarted
+                    ? "opacity-100 translate-y-0 rotate-3 md:translate-x-14"
+                    : "opacity-0 translate-y-5"
                 }`}
-                style={{ 
-                  transitionDelay: animationStarted ? '400ms' : '0ms',
-                  transform: animationStarted 
-                    ? 'translateY(5px) translateX(60px) rotate(5deg)' 
-                    : 'translateY(20px) translateX(0px) rotate(0deg)'
-                }}
+                style={{ transitionDelay: animationStarted ? "400ms" : "0ms" }}
               >
-                <div className="w-full h-full bg-gradient-to-br from-orange-400 to-red-400 flex items-center justify-center text-white">
-                  <span className="text-xs font-medium">Photo 5</span>
-                </div>
+                <img
+                  src={PersonalPhotoFive}
+                  alt="Far right portrait"
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
             </div>
           </div>
 
-          {/* Main Heading */}
+          {/* Heading */}
           <AnimatedSection>
             <h1 className="text-5xl md:text-6xl font-bold text-heading text-center mb-8">
               Hi, I'm Andrew!
             </h1>
           </AnimatedSection>
 
-          {/* About Text */}
+          {/* Bio Text */}
           <div className="space-y-6 text-lg text-paragraph max-w-3xl mx-auto text-center">
             <AnimatedSection delay={200}>
               <p>
-              I'm a designer at heart — my passion lies in bringing clarity and simplicity to complex problems. My journey started in healthcare, where I discovered the power of thoughtful design in transforming patient outcomes and streamlining systems. I’ve been obsessed ever since!
+                I'm a designer at heart — my passion lies in bringing clarity and
+                simplicity to complex problems. My journey started in healthcare,
+                where I discovered the power of thoughtful design in transforming
+                patient outcomes and streamlining systems. I’ve been obsessed ever since!
               </p>
             </AnimatedSection>
-
             <AnimatedSection delay={400}>
               <p>
-              I see design as more than just visuals — it’s about people, empathy, and solving real problems. Whether it's integrating AI into TeleHealth or leading global teams, I’ve spent over 15 years crafting user-centered solutions that truly make a difference. From workflows to wireframes, I love creating products that are not only efficient but beautifully intuitive.
+                I see design as more than just visuals — it’s about people,
+                empathy, and solving real problems. Whether it's integrating AI
+                into TeleHealth or leading global teams, I’ve spent over 15 years
+                crafting user-centered solutions that truly make a difference.
               </p>
             </AnimatedSection>
-
             <AnimatedSection delay={600}>
               <p>
-              I'm a curious mind and a builder of better ways — leading with data, driven by user insight, and always searching for the next big challenge. Whether I’m refining a product lifecycle or coaching a team of 15, I believe in elevating experiences through design and compassion.
+                I'm a curious mind and a builder of better ways — leading with
+                data, driven by user insight, and always searching for the next
+                big challenge. I believe in elevating experiences through design
+                and compassion.
               </p>
             </AnimatedSection>
           </div>
 
-          {/* Contact Section */}
+          {/* Contact */}
           <div className="mt-20 text-center">
             <AnimatedSection delay={800}>
               <p className="text-paragraph mb-2">LET'S BE FRIENDS!</p>
-              <a 
-                href="mailto:erk004@ucsd.edu" 
+              <a
+                href="mailto:andrewseymour77@gmail.com"
                 className="text-2xl font-medium text-heading hover:text-blue-600 transition-colors"
               >
                 andrewseymour77@gmail.com
@@ -194,7 +188,7 @@ const About = () => {
           {/* Footer */}
           <div className="flex justify-between items-center mt-16 text-sm text-paragraph">
             <AnimatedSection delay={1000}>
-              <button 
+              <button
                 onClick={scrollToTop}
                 className="hover:text-heading transition-colors cursor-pointer"
               >
@@ -203,14 +197,6 @@ const About = () => {
             </AnimatedSection>
             <AnimatedSection delay={1200}>
               <span>MADE WITH ❤️ AND ☕ IN 🇺🇸 🇨🇦</span>
-            </AnimatedSection>
-            <AnimatedSection delay={1400}>
-              <button 
-                onClick={openResume}
-                className="hover:text-heading transition-colors cursor-pointer"
-              >
-                Resume →
-              </button>
             </AnimatedSection>
           </div>
         </div>

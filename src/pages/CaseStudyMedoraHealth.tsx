@@ -181,7 +181,6 @@ const CaseStudyAmbientAI = () => {
                <LazyLoadImage
                    src={OverviewImg}
                    alt=""
-          
                    className="w-full object-cover rounded-2xl shadow-sm" />
             </div>
 
