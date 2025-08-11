@@ -1,4 +1,3 @@
-// src/components/LogoutButton.tsx
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';

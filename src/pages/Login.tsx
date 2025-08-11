@@ -1,4 +1,3 @@
-// src/pages/Login.tsx
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -24,7 +23,6 @@ const Login: React.FC = () => {
         setIsLoading(true);
         setError('');
 
-        // Add a small delay for better UX
         await new Promise(resolve => setTimeout(resolve, 500));
 
         const success = login(password);
