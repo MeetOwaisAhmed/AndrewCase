@@ -8,6 +8,8 @@ import PersonalPhotoTwo from "@/Images/LeftOfCenter.jpeg";
 import MainPhoto from "@/Images/Center.jpeg";
 import PersonalPhotoFour from "@/Images/RightOfCenter.jpeg";
 import PersonalPhotoFive from "@/Images/FarRight.jpg";
+import AtlantaImg from "@/Images/Atlanta-1.jpg";
+import AtlantaImg1 from "@/Images/Atlanta-2.jpg";
 
 const About = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
@@ -65,7 +67,7 @@ const About = () => {
                 style={{ transitionDelay: animationStarted ? "0ms" : "0ms" }}
               >
                 <img
-                  src={PersonalPhotoOne}
+                  src={AtlantaImg}
                   alt="Far left portrait"
                   className="w-full h-full object-contain rounded-lg"
                 />
@@ -81,7 +83,7 @@ const About = () => {
                 style={{ transitionDelay: animationStarted ? "100ms" : "0ms" }}
               >
                 <img
-                  src={PersonalPhotoTwo}
+                  src={PersonalPhotoOne}
                   alt="Left of center portrait"
                   className="w-full h-full object-cover rounded-lg"
                 />
@@ -97,7 +99,7 @@ const About = () => {
                 style={{ transitionDelay: animationStarted ? "200ms" : "0ms" }}
               >
                 <img
-                  src={MainPhoto}
+                  src={PersonalPhotoTwo}
                   alt="Center headshot"
                   className="w-full h-full object-cover rounded-lg"
                 />
@@ -129,7 +131,7 @@ const About = () => {
                 style={{ transitionDelay: animationStarted ? "400ms" : "0ms" }}
               >
                 <img
-                  src={PersonalPhotoFive}
+                  src={AtlantaImg1}
                   alt="Far right portrait"
                   className="w-full h-full object-cover rounded-lg"
                 />
@@ -148,26 +150,23 @@ const About = () => {
           <div className="space-y-6 text-lg text-paragraph max-w-3xl mx-auto text-center">
             <AnimatedSection delay={200}>
               <p>
-                I'm a designer at heart — my passion lies in bringing clarity and
-                simplicity to complex problems. My journey started in healthcare,
-                where I discovered the power of thoughtful design in transforming
-                patient outcomes and streamlining systems. I’ve been obsessed ever since!
+                I'm a designer at heart. My passion lies in bringing clarity and simplicity to complex problems.
+                I began my journey in healthcare, where I saw firsthand how thoughtful design can transform patient outcomes and streamline systems. 
+                Since then, I've expanded into a range of industries, applying those same principles to solve challenges beyond healthcare.
               </p>
             </AnimatedSection>
             <AnimatedSection delay={400}>
               <p>
-                I see design as more than just visuals — it’s about people,
-                empathy, and solving real problems. Whether it's integrating AI
-                into TeleHealth or leading global teams, I’ve spent over 15 years
-                crafting user-centered solutions that truly make a difference.
+                I see design as more than just visuals. It's about people, empathy, and solving real problems.
+                Whether it's integrating AI into TeleHealth or leading global teams across different sectors, 
+                I've spent over 15 years crafting user-centered solutions that make a difference.
               </p>
             </AnimatedSection>
             <AnimatedSection delay={600}>
               <p>
-                I'm a curious mind and a builder of better ways — leading with
-                data, driven by user insight, and always searching for the next
-                big challenge. I believe in elevating experiences through design
-                and compassion.
+                I'm a curious mind and a builder of better ways. I lead with data, am driven by user insight, 
+                and always look for the next big challenge.
+                I believe in elevating experiences through design and compassion.
               </p>
             </AnimatedSection>
           </div>

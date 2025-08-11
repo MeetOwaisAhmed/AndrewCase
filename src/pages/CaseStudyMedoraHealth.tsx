@@ -22,11 +22,11 @@ import HifiDesignTwo          from "@/Images/MedoraHifiDesignTwo.svg";
 import HifiDesignThree        from "@/Images/MedoraHifiDesignThree.svg";
 import HifiDesignFour         from "@/Images/MedoraHifiDesignFour.svg";
 import ResultImgOne           from "@/Images/MedoraResultsImgOne.svg";
-import ResultImgTwo           from "@/Images/MedoraResultsImgTwo.svg";   
+import ResultImgTwo           from "@/Images/MedoraResultsImgTwo.svg";
 
 import HeroImg from "@/Images/CaseStudyImgTwo.svg";
 
-/** Fade‑in hook */
+/** Fade-in hook */
 function useFadeInOnScroll() {
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -50,7 +50,7 @@ const CaseStudyAmbientAI = () => {
   const [activeSection, setActiveSection] = useState(0);
   useFadeInOnScroll();
 
-  /** highlight sidebar link (optional) */
+  /** highlight sidebar link */
   useEffect(() => {
     const onScroll = () => {
       const pos = window.scrollY + 200;
@@ -64,65 +64,81 @@ const CaseStudyAmbientAI = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /** scroll to a numbered `.content-section` */
-  const scrollToSection = (idx: number) => {
-    const sec = document.querySelectorAll<HTMLElement>(".content-section")[idx];
-    sec?.scrollIntoView({ behavior: "smooth" });
+  /** scroll to a section by id */
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      {/* ─── Hero Section ───────────────────────────────────────────────────── */}
+      {/* Hero Section */}
       <section
-  className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center"
-  style={{ backgroundImage: `url(${HeroImg})` }}
->
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: `url(${HeroImg})` }}
+      >
+        {/* scroll arrow */}
+        <div
+          onClick={() => scrollTo("problem")}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
+        >
+          <ArrowDown className="w-8 h-8 text-white animate-bounce" />
+        </div>
+      </section>
 
-  {/* scroll arrow */}
-  <div
-    onClick={() => scrollToSection(0)}
-    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
-  >
-    <ArrowDown className="w-8 h-8 text-white animate-bounce" />
-  </div>
-</section>
-
-
-      {/* ─── Main Content ───────────────────────────────────────────────────── */}
+      {/* Main Content */}
       <div className="relative">
         <div className="max-w-full mx-auto flex">
           {/* Sidebar (xl+) */}
           <div className="hidden xl:flex w-80 sticky top-20 h-screen flex-col justify-between px-6 pb-24">
-            <img src={Logo} alt="Ambient AI Logo" />
+            <img src={Logo} alt="Medora Health Logo" />
             <nav className="space-y-4">
-              {["Challenge", "Solution", "MVP"].map((label, i) => (
-                <button
-                  key={label}
-                  onClick={() => scrollToSection(i)}
-                  className={`flex items-center gap-3 w-full text-left py-3 px-4 rounded-lg ${
-                    activeSection === i ? "bg-blue-100" : "hover:bg-blue-50"
-                  }`}
-                >
-                  <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                  {label}
-                </button>
-              ))}
+              {/* Problem */}
+              <button
+                onClick={() => scrollTo("problem")}
+                className={`flex items-center gap-3 w-full py-3 px-4 rounded-lg ${
+                  activeSection === 0 ? "bg-blue-100" : "hover:bg-blue-50"
+                }`}
+              >
+                <span>➡️</span>
+                <span>Problem</span>
+              </button>
+              {/* User Stories */}
+              <button
+                onClick={() => scrollTo("user-stories")}
+                className={`flex items-center gap-3 w-full py-3 px-4 rounded-lg ${
+                  activeSection === 1 ? "bg-blue-100" : "hover:bg-blue-50"
+                }`}
+              >
+                <span>➡️</span>
+                <span>User Stories</span>
+              </button>
+              {/* Solution */}
+              <button
+                onClick={() => scrollTo("wireframes")}
+                className={`flex items-center gap-3 w-full py-3 px-4 rounded-lg ${
+                  activeSection === 2 ? "bg-blue-100" : "hover:bg-blue-50"
+                }`}
+              >
+                <span>➡️</span>
+                <span>Solution</span>
+              </button>
+              {/* Back to top */}
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="flex items-center gap-3 w-full text-left py-3 px-4 rounded-lg hover:bg-blue-50"
+                className="flex items-center gap-3 w-full py-3 px-4 rounded-lg hover:bg-blue-50"
               >
-                <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                Back to top
+                <span>⬆️</span>
+                <span>Back to top</span>
               </button>
             </nav>
           </div>
 
           {/* Scrollable right */}
           <div className="flex-1 xl:pl-4 px-6 xl:px-0 xl:pr-12">
-            {/* ── Four‑column grid */}
-            <div className="content-section grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+            {/* ── Four-column grid ─────────────────────────────────────────────── */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
               <div className="fade-in-section opacity-0 translate-y-6 mt-10">
                 <p className="text-sm uppercase tracking-wider">Role</p>
                 <ul className="mt-2 space-y-1">
@@ -158,73 +174,71 @@ const CaseStudyAmbientAI = () => {
               </div>
             </div>
 
-            {/* ── “Overview */}
+            {/* ── Overview ───────────────────────────────────────────────────────── */}
             <div className="mb-12 fade-in-section opacity-0 translate-y-6">
               <p className="text-sm uppercase tracking-wider">Overview</p>
               <h2 className="mt-2 text-3xl md:text-4xl font-bold">
-                  Simplifying healthcare communication, one campaign at a time.
+                Simplifying healthcare communication, one campaign at a time.
               </h2>
               <p className="mt-4 text-lg leading-relaxed">
-                  Medora Health is a healthcare growth platform designed to help teams launch targeted campaigns, track engagement, and turn complex data into actionable insights.
+                Medora Health is a healthcare growth platform designed to help teams launch targeted campaigns, track engagement, and turn complex data into actionable insights.
                 <br/>
-                  As the Director of Design, I led a 13 month redesign initiative with the goal of simplifying workflows, making data storytelling effortless, and building trust through a clean, modern interface.
+                As the Director of Design, I led a 13 month redesign initiative with the goal of simplifying workflows, making data storytelling effortless, and building trust through a clean, modern interface.
               </p>
             </div>
-
-            {/* ── Overview Illustration */}
             <div className="fade-in-section opacity-0 translate-y-6 mb-16">
-              {/* <img
+              <LazyLoadImage
                 src={OverviewImg}
-                alt="Illustration of clinician using ambient AI device"
-                className="w-full rounded-2xl shadow-sm"
-              /> */}
-               <LazyLoadImage
-                   src={OverviewImg}
-                   alt=""
-                   className="w-full object-cover rounded-2xl shadow-sm" />
+                alt="Overview illustration"
+                className="w-full object-cover rounded-2xl shadow-sm"
+                effect="blur"
+              />
             </div>
 
-            {/* ── The Problem */}
-            <div className="mb-6 fade-in-section opacity-0 translate-y-6">
+            {/* ── The Problem ─────────────────────────────────────────────────────── */}
+            <div
+              id="problem"
+              className="mb-6 fade-in-section opacity-0 translate-y-6 content-section"
+            >
               <p className="text-sm uppercase tracking-wider">The Problem</p>
               <h2 className="mt-2 text-3xl md:text-4xl font-bold">
-                  Healthcare teams are overwhelmed by data and fragmented workflows.
+                Healthcare teams are overwhelmed by data and fragmented workflows.
               </h2>
               <p className="mt-4 text-lg leading-relaxed">
-                  Medora Health’s earlier platform had powerful features but lacked clarity. Data was scattered across complex dashboards, requiring too much time to interpret. Campaign creation was tedious, with no clear flow or guidance for non-marketing users.
+                Medora Health’s earlier platform had powerful features but lacked clarity. Data was scattered across complex dashboards, requiring too much time to interpret. Campaign creation was tedious, with no clear flow or guidance for non-marketing users.
                 <br/><br/>
-                  We discovered that healthcare teams needed more than just data, they needed actionable insights, an interface that felt intuitive, and a system that guided them every step of the way.
+                We discovered that healthcare teams needed more than just data—they needed actionable insights, an interface that felt intuitive, and a system that guided them every step of the way.
               </p>
             </div>
             <div className="fade-in-section opacity-0 translate-y-6 mb-12">
               <img
                 src={ProblemImg}
-                alt=""
+                alt="Problem illustration"
                 className="w-full rounded-2xl shadow-sm"
               />
             </div>
 
-            {/* ── The Challenge */}
-            <div className="mb-6 fade-in-section opacity-0 translate-y-6">
+            {/* ── The Challenge ────────────────────────────────────────────────────── */}
+            <div className="mb-20 fade-in-section opacity-0 translate-y-6">
               <p className="text-sm uppercase tracking-wider">The Challenge</p>
               <h2 className="mt-2 text-3xl md:text-4xl font-bold">
-                  How can we make healthcare data and communication tools feel simple, human, and actionable?
+                How can we make healthcare data and communication tools feel simple, human, and actionable?
               </h2>
               <p className="mt-4 text-lg leading-relaxed">
-                  Healthcare teams spent nearly 75% of their time wrestling with manual workflows, jumping between spreadsheets, outdated tools, and disconnected systems—just to launch a single campaign. This inefficiency created bottlenecks, missed opportunities, and frustration.
+                Healthcare teams spent nearly 75% of their time wrestling with manual workflows, jumping between spreadsheets, outdated tools, and disconnected systems—just to launch a single campaign. This inefficiency created bottlenecks, missed opportunities, and frustration.
                 <br/><br/>
-                  Our challenge was to <span className="font-semibold text-heading">replace manual, fragmented tasks with a streamlined, guided experience that not only saves time but also turns complex healthcare data into actionable insights.</span>
+                Our challenge was to <span className="font-semibold text-heading">replace manual, fragmented tasks with a streamlined, guided experience that not only saves time but also turns complex healthcare data into actionable insights.</span>
               </p>
             </div>
             <div className="fade-in-section opacity-0 translate-y-6 mb-20">
               <img
                 src={ChallengeImg}
-                alt=""
+                alt="Challenge illustration"
                 className="w-full rounded-2xl shadow-sm"
               />
             </div>
 
-            {/* ── Research & discovery */}
+            {/* ── Research & Discovery ───────────────────────────────────────────────── */}
             <div className="mb-16">
               <div className="mb-8 fade-in-section opacity-0 translate-y-6">
                 <p className="text-sm uppercase tracking-wider">Research & Discovery</p>
@@ -237,7 +251,7 @@ const CaseStudyAmbientAI = () => {
               </div>
               <div className="space-y-8">
                 <div className="fade-in-section opacity-0 translate-y-6">
-                  <img src={ResearchImg} alt="" className="w-full rounded-2xl shadow-sm" />
+                  <img src={ResearchImg} alt="Research illustration" className="w-full rounded-2xl shadow-sm" />
                 </div>
                 <p className="mt-4 text-lg leading-relaxed">
                   These findings set the stage for a design strategy centered on clarity, efficiency, and trust, turning a chaotic workflow into a seamless journey.
@@ -245,9 +259,12 @@ const CaseStudyAmbientAI = () => {
               </div>
             </div>
 
-            {/* ── User Stories */}
-            <div className="mb-16">
-              <div className="mb-8 fade-in-section opacity-0 translate-y-6">
+            {/* ── User Stories ─────────────────────────────────────────────────────── */}
+            <div
+              id="user-stories"
+              className="mb-16 fade-in-section opacity-0 translate-y-6 content-section"
+            >
+              <div className="mb-8">
                 <p className="text-sm uppercase tracking-wider">User Stories</p>
                 <h2 className="mt-2 text-3xl md:text-4xl font-bold">
                   Understanding the people behind the product.
@@ -257,11 +274,11 @@ const CaseStudyAmbientAI = () => {
                 </p>
               </div>
               <div className="fade-in-section opacity-0 translate-y-6">
-                <img src={MedoraUserStoryImg} alt="Constraints overview" className="w-full rounded-2xl shadow-sm" />
+                <img src={MedoraUserStoryImg} alt="User stories illustration" className="w-full rounded-2xl shadow-sm" />
               </div>
             </div>
 
-            {/* ── User Flows */}
+            {/* ── User Flows ───────────────────────────────────────────────────────── */}
             <div className="mb-16">
               <div className="mb-8 fade-in-section opacity-0 translate-y-6">
                 <p className="text-sm uppercase tracking-wider">User Flows</p>
@@ -272,23 +289,18 @@ const CaseStudyAmbientAI = () => {
                   We mapped the entire journey of a healthcare team member, from logging in to launching a campaign, removing unnecessary steps and making key actions like campaign creation just a few clicks away. This step helped visualize pain points and opportunities for simplification.
                 </p>
               </div>
-              <div className="fade-in-section opacity-0 translate-y-6">
-                <img src={MedoraUserFlowOneImg} alt="" className="w-full rounded-2xl shadow-sm" />
-              </div>
-              <div className="fade-in-section opacity-0 translate-y-6">
-                <img src={MedoraUserFlowTwoImg} alt="" className="w-full rounded-2xl shadow-sm" />
-              </div>
-              <div className="fade-in-section opacity-0 translate-y-6">
-                <img src={MedoraUserFlowThreeImg} alt="" className="w-full rounded-2xl shadow-sm" />
-              </div>
-              <div className="fade-in-section opacity-0 translate-y-6">
-                <img src={MedoraUserFlowFourImg} alt="" className="w-full rounded-2xl shadow-sm" />
-              </div>
+              <div className="fade-in-section opacity-0 translate-y-6"><img src={MedoraUserFlowOneImg} alt="" className="w-full rounded-2xl shadow-sm" /></div>
+              <div className="fade-in-section opacity-0 translate-y-6"><img src={MedoraUserFlowTwoImg} alt="" className="w-full rounded-2xl shadow-sm" /></div>
+              <div className="fade-in-section opacity-0 translate-y-6"><img src={MedoraUserFlowThreeImg} alt="" className="w-full rounded-2xl shadow-sm" /></div>
+              <div className="fade-in-section opacity-0 translate-y-6"><img src={MedoraUserFlowFourImg} alt="" className="w-full rounded-2xl shadow-sm" /></div>
             </div>
 
-            {/* ── Wireframes */}
-            <div className="mb-16">
-              <div className="mb-8 fade-in-section opacity-0 translate-y-6">
+            {/* ── Wireframes ──────────────────────────────────────────────────────── */}
+            <div
+              id="wireframes"
+              className="mb-16 fade-in-section opacity-0 translate-y-6 content-section"
+            >
+              <div className="mb-8">
                 <p className="text-sm uppercase tracking-wider">Wireframes</p>
                 <h2 className="mt-2 text-3xl md:text-4xl font-bold">
                   Turning ideas into structure.
@@ -298,93 +310,50 @@ const CaseStudyAmbientAI = () => {
                 </p>
               </div>
               <div className="fade-in-section opacity-0 translate-y-6">
-                <img src={WireframesImg} alt="User story cards" className="w-full shadow-sm" />
+                <img src={WireframesImg} alt="Wireframes" className="w-full shadow-sm" />
               </div>
             </div>
 
-            {/* ── Hi‑fi Designs  */}
-           <div className="mb-12">
-  <div className="mb-4 fade-in-section opacity-0 translate-y-6">
-    <p className="text-sm uppercase tracking-wider">Hi‑fi designs</p>
-    <h2 className="mt-2 text-3xl md:text-4xl font-bold">
-      From Concept to Reality.
-    </h2>
-    <p className="mt-4 text-lg leading-relaxed">
-      After validating the wireframes and user flows, we moved to high‑fidelity designs. Our focus was on creating a clean, modern interface that balances data visualization, user guidance, and seamless navigation. Each element of the design emphasizes clarity and efficiency, reducing the cognitive load for healthcare professionals.
-    </p>
-  </div>
-  <div className="space-y-8">
-    <div className="fade-in-section opacity-0 translate-y-6">
-      <img
-        src={HifiDesignOne}
-        alt="Hi‑fi design 1"
-        className="w-full rounded-2xl shadow-sm"
-      />
-    </div>
-    <div className="fade-in-section opacity-0 translate-y-6">
-      <img
-        src={HifiDesignTwo}
-        alt="Hi‑fi design 2"
-        className="w-full rounded-2xl shadow-sm"
-      />
-    </div>
-    <div className="fade-in-section opacity-0 translate-y-6">
-      <img
-        src={HifiDesignThree}
-        alt="Hi‑fi design 3"
-        className="w-full rounded-2xl shadow-sm"
-      />
-    </div>
-    <div className="fade-in-section opacity-0 translate-y-6">
-      <img
-        src={HifiDesignFour}
-        alt="Hi‑fi design 4"
-        className="w-full rounded-2xl shadow-sm"
-      />
-    </div>
-  </div>
-           </div>
+            {/* ── Hi-fi Designs ─────────────────────────────────────────────────────── */}
+            <div className="mb-12">
+              <div className="mb-4 fade-in-section opacity-0 translate-y-6">
+                <p className="text-sm uppercase tracking-wider">Hi-fi designs</p>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold">
+                  From Concept to Reality.
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed">
+                  After validating the wireframes and user flows, we moved to high-fidelity designs. Our focus was on creating a clean, modern interface that balances data visualization, user guidance, and seamless navigation. Each element of the design emphasizes clarity and efficiency, reducing the cognitive load for healthcare professionals.
+                </p>
+              </div>
+              <div className="space-y-8">
+                <div className="fade-in-section opacity-0 translate-y-6"><img src={HifiDesignOne} alt="Hi-fi 1" className="w-full rounded-2xl shadow-sm" /></div>
+                <div className="fade-in-section opacity-0 translate-y-6"><img src={HifiDesignTwo} alt="Hi-fi 2" className="w-full rounded-2xl shadow-sm" /></div>
+                <div className="fade-in-section opacity-0 translate-y-6"><img src={HifiDesignThree} alt="Hi-fi 3" className="w-full rounded-2xl shadow-sm" /></div>
+                <div className="fade-in-section opacity-0 translate-y-6"><img src={HifiDesignFour} alt="Hi-fi 4" className="w-full rounded-2xl shadow-sm" /></div>
+              </div>
+            </div>
 
-    
-            {/* ── Results & Learnings */}
-<div className="mb-16">
-
-{/* heading + intro */}
-<div className="mb-8 fade-in-section opacity-0 translate-y-6">
-  <p className="text-sm uppercase tracking-wider">results & learnings</p>
-  <h2 className="mt-2 text-3xl md:text-4xl font-bold">
-    Delivering measurable impact for healthcare teams.
-  </h2>
-  <p className="mt-4 text-lg leading-relaxed">
-    Our redesigned platform transformed how healthcare teams manage campaigns, track performance, and interact with data. By simplifying complex workflows, we helped teams save time, reduce frustration, and focus more on patient care rather than navigating tools.
-  </p>
-</div>
-
-{/* first full‑width image */}
-<div className="fade-in-section opacity-0 translate-y-6 -mx-6 xl:mx-0">
-  <img
-    src={ResultImgOne}
-    alt="User story cards"
-    className="w-full max-w-none shadow-sm"
-  />
-</div>
-
-{/* gap under the supporting line */}
-<p className="mt-8 mb-8 text-lg leading-relaxed">
-  Users found the tool more intuitive and less overwhelming.
-</p>
-
-{/* second full‑width image */}
-<div className="fade-in-section opacity-0 translate-y-6 -mx-6 xl:mx-0">
-  <img
-    src={ResultImgTwo}
-    alt="Key metrics impact"
-    className="w-full max-w-none shadow-sm"
-  />
-</div>
-
-</div>
-
+            {/* ── Results & Learnings ───────────────────────────────────────────────── */}
+            <div className="mb-16 fade-in-section opacity-0 translate-y-6">
+              <div className="mb-8">
+                <p className="text-sm uppercase tracking-wider">Results & Learnings</p>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold">
+                  Delivering measurable impact for healthcare teams.
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed">
+                  Our redesigned platform transformed how healthcare teams manage campaigns, track performance, and interact with data. By simplifying complex workflows, we helped teams save time, reduce frustration, and focus more on patient care rather than navigating tools.
+                </p>
+              </div>
+              <div className="fade-in-section opacity-0 translate-y-6 -mx-6 xl:mx-0 mb-8">
+                <img src={ResultImgOne} alt="Results 1" className="w-full max-w-none shadow-sm" />
+              </div>
+              <p className="mt-8 mb-8 text-lg leading-relaxed">
+                Users found the tool more intuitive and less overwhelming.
+              </p>
+              <div className="fade-in-section opacity-0 translate-y-6 -mx-6 xl:mx-0">
+                <img src={ResultImgTwo} alt="Results 2" className="w-full max-w-none shadow-sm" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

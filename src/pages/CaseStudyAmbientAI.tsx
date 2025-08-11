@@ -34,7 +34,7 @@ import WhatChangedImg      from "@/Images/WhatChangedImg.svg";
 import DrPatelImg          from "@/Images/DrPatelImg.svg";
 import JamieLinImg         from "@/Images/JamieLinImg.svg";
 
-/** Fade‑in hook */
+/** Fade-in hook */
 function useFadeInOnScroll() {
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -72,10 +72,9 @@ const CaseStudyAmbientAI = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /** scroll to a numbered `.content-section` */
-  const scrollToSection = (idx: number) => {
-    const sec = document.querySelectorAll<HTMLElement>(".content-section")[idx];
-    sec?.scrollIntoView({ behavior: "smooth" });
+  /** scroll to a given section id */
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -85,35 +84,15 @@ const CaseStudyAmbientAI = () => {
       {/* ─── Hero Section ───────────────────────────────────────────────────── */}
       <section className="relative min-h-screen overflow-hidden bg-[#FFF0D1]">
         {/* Top decorations */}
-        <img
-          src={HeroTopLeft}
-          aria-hidden
-          className="hidden lg:block absolute top-0 left-0 w-32 md:w-48 lg:w-64"
-        />
-        <img
-          src={HeroTopRight}
-          aria-hidden
-          className="hidden lg:block absolute top-0 right-0 w-28 md:w-44 lg:w-60"
-        />
+        <img src={HeroTopLeft}    aria-hidden className="hidden lg:block absolute top-0 left-0 w-32 md:w-48 lg:w-64" />
+        <img src={HeroTopRight}   aria-hidden className="hidden lg:block absolute top-0 right-0 w-28 md:w-44 lg:w-60" />
 
         {/* Bottom mobiles */}
-        <img
-          src={HeroBottomLeft}
-          aria-hidden
-          className="hidden lg:block absolute bottom-0 sm:bottom-[-4rem] md:bottom-[-6rem] lg:bottom-[-8rem] -left-8 md:-left-16 w-[30rem] md:w-[34rem] lg:w-[38rem]" 
-        />
-        <img
-          src={HeroBottomRight}
-          aria-hidden
-          className="hidden lg:block absolute bottom-0 sm:bottom-[-4rem] md:bottom-[-6rem] lg:bottom-[-8rem] -right-8 md:-right-16 w-[30rem] md:w-[34rem] lg:w-[38rem]" 
-        />
+        <img src={HeroBottomLeft}  aria-hidden className="hidden lg:block absolute bottom-0 sm:bottom-[-4rem] md:bottom-[-6rem] lg:bottom-[-8rem] -left-8 md:-left-16 w-[30rem] md:w-[34rem] lg:w-[38rem]" />
+        <img src={HeroBottomRight} aria-hidden className="hidden lg:block absolute bottom-0 sm:bottom-[-4rem] md:bottom-[-6rem] lg:bottom-[-8rem] -right-8 md:-right-16 w-[30rem] md:w-[34rem] lg:w-[38rem]" />
 
         {/* Center “U” */}
-        <img
-          src={BottomCenter}
-          aria-hidden
-          className="absolute left-1/2 bottom-20 md:bottom-28 lg:bottom-32 transform -translate-x-1/2 w-48 md:w-64 lg:w-80" 
-        />
+        <img src={BottomCenter} aria-hidden className="absolute left-1/2 bottom-20 md:bottom-28 lg:bottom-32 transform -translate-x-1/2 w-48 md:w-64 lg:w-80" />
 
         {/* Hero copy */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center transform -translate-y-36">
@@ -130,7 +109,7 @@ const CaseStudyAmbientAI = () => {
 
         {/* Scroll arrow */}
         <div
-          onClick={() => scrollToSection(0)}
+          onClick={() => scrollTo("problem")}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer"
         >
           <ArrowDown className="w-8 h-8 text-blue/70 animate-bounce" />
@@ -143,32 +122,56 @@ const CaseStudyAmbientAI = () => {
           {/* Sidebar (xl+) */}
           <div className="hidden xl:flex w-80 sticky top-20 h-screen flex-col justify-between px-6 pb-24">
             <img src={Logo} alt="Ambient AI Logo" />
+
             <nav className="space-y-4">
-              {["Challenge", "Solution", "MVP"].map((label, i) => (
-                <button
-                  key={label}
-                  onClick={() => scrollToSection(i)}
-                  className={`flex items-center gap-3 w-full text-left py-3 px-4 rounded-lg ${
-                    activeSection === i ? "bg-blue-100" : "hover:bg-blue-50"
-                  }`}
-                >
-                  <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                  {label}
-                </button>
-              ))}
+              {/* Problem */}
+              <button
+                onClick={() => scrollTo("problem")}
+                className={`flex items-center gap-3 w-full py-3 px-4 rounded-lg ${
+                  activeSection === 0 ? "bg-blue-100" : "hover:bg-blue-50"
+                }`}
+              >
+                <span>➡️</span>
+                <span>Problem</span>
+              </button>
+
+              {/* User Stories */}
+              <button
+                onClick={() => scrollTo("user-stories")}
+                className={`flex items-center gap-3 w-full py-3 px-4 rounded-lg ${
+                  activeSection === 1 ? "bg-blue-100" : "hover:bg-blue-50"
+                }`}
+              >
+                <span>➡️</span>
+                <span>User Stories</span>
+              </button>
+
+              {/* Solution */}
+              <button
+                onClick={() => scrollTo("our-solution")}
+                className={`flex items-center gap-3 w-full py-3 px-4 rounded-lg ${
+                  activeSection === 2 ? "bg-blue-100" : "hover:bg-blue-50"
+                }`}
+              >
+                <span>➡️</span>
+                <span>Solution</span>
+              </button>
+
+              {/* Back to top */}
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="flex items-center gap-3 w-full text-left py-3 px-4 rounded-lg hover:bg-blue-50"
+                className="flex items-center gap-3 w-full py-3 px-4 rounded-lg hover:bg-blue-50"
               >
-                <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                Back to top
+                <span>⬆️</span>
+                <span>Back to top</span>
               </button>
             </nav>
           </div>
 
           {/* Scrollable right */}
           <div className="flex-1 xl:pl-4 px-6 xl:px-0 xl:pr-12">
-            {/* ── Four‑column grid */}
+
+            {/* Four-column grid */}
             <div className="content-section grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
               <div className="fade-in-section opacity-0 translate-y-6 mt-10">
                 <p className="text-sm uppercase tracking-wider">Role</p>
@@ -206,7 +209,7 @@ const CaseStudyAmbientAI = () => {
             </div>
 
             {/* ── “The Problem” */}
-            <div className="mb-12 fade-in-section opacity-0 translate-y-6">
+            <section id="problem" className="mb-12 fade-in-section opacity-0 translate-y-6 content-section">
               <p className="text-sm uppercase tracking-wider">The Problem</p>
               <h2 className="mt-2 text-3xl md:text-4xl font-bold">
                 Clinical documentation is a growing burden for providers.
@@ -216,7 +219,7 @@ const CaseStudyAmbientAI = () => {
                 <br/><br/>
                 We explored how ambient listening and intelligent design can help reduce documentation load while preserving the integrity and flow of in-person care.
               </p>
-            </div>
+            </section>
 
             {/* ── Problem Illustration */}
             <div className="fade-in-section opacity-0 translate-y-6 mb-16">
@@ -361,8 +364,8 @@ const CaseStudyAmbientAI = () => {
             </div>
 
             {/* ── User Stories */}
-            <div className="mb-16">
-              <div className="mb-8 fade-in-section opacity-0 translate-y-6">
+            <section id="user-stories" className="mb-16 fade-in-section opacity-0 translate-y-6 content-section">
+              <div className="mb-8">
                 <p className="text-sm uppercase tracking-wider">User Stories</p>
                 <h2 className="mt-2 text-3xl md:text-4xl font-bold">
                   We designed with real providers in mind — not just personas.
@@ -371,10 +374,8 @@ const CaseStudyAmbientAI = () => {
                   Through interviews, shadowing, and feedback sessions, we surfaced three common provider mindsets. Each reflected the tension between caring for patients and completing documentation — and each became a lens through which we designed the solution.
                 </p>
               </div>
-              <div className="fade-in-section opacity-0 translate-y-6">
-                <img src={UserStoriesImg} alt="User story cards" className="w-full rounded-2xl shadow-sm" />
-              </div>
-            </div>
+              <img src={UserStoriesImg} alt="User story cards" className="w-full rounded-2xl shadow-sm" />
+            </section>
 
             {/* ── Core Principles */}
             <div className="mb-16">
@@ -403,8 +404,8 @@ const CaseStudyAmbientAI = () => {
             </div>
 
             {/* ── Our Solution */}
-            <div className="mb-16">
-              <div className="mb-8 fade-in-section opacity-0 translate-y-6">
+            <section id="our-solution" className="mb-16 fade-in-section opacity-0 translate-y-6 content-section">
+              <div className="mb-8">
                 <p className="text-sm uppercase tracking-wider">Our Solution</p>
                 <h2 className="mt-2 text-3xl md:text-4xl font-bold">
                   Designing an AI-First, Human-Centered Mobile Experience
@@ -413,15 +414,13 @@ const CaseStudyAmbientAI = () => {
                   To reduce cognitive and administrative load, we designed an app experience that stays quiet in the background, aligns with clinical workflows, and reinforces trust through clarity and consent. Each screen was thoughtfully crafted to support minimal interaction while delivering high utility during the care process.
                 </p>
               </div>
-              <div className="fade-in-section opacity-0 translate-y-6">
-                <img src={OurSolutionImg} alt="Our solution screenshots" className="w-full rounded-2xl shadow-sm" />
-              </div>
-            </div>
+              <img src={OurSolutionImg} alt="Our solution screenshots" className="w-full rounded-2xl shadow-sm" />
+            </section>
 
             {/* ── Interfaces */}
             <div className="mb-16">
               <div className="mb-8 fade-in-section opacity-0 translate-y-6">
-                <p className="text-sm uppercase tracking-wider text-gray-400">Key Interfaces</p>
+                <p className="text-sm uppercase tracking-wider">Key Interfaces</p>
                 <h2 className="mt-2 text-3xl md:text-4xl font-bold">Ambient Listening Begins</h2>
               </div>
               <div className="space-y-12">
@@ -443,7 +442,7 @@ const CaseStudyAmbientAI = () => {
             {/* ── Results & Learnings */}
             <div className="mb-16">
               <div className="mb-6 fade-in-section opacity-0 translate-y-6">
-                <p className="text-sm uppercase tracking-wider text-gray-400">Results & Learnings</p>
+                <p className="text-sm uppercase tracking-wider">Results & Learnings</p>
                 <h2 className="mt-2 text-3xl md:text-4xl font-bold">What Changed?</h2>
                 <p className="mt-2 text-lg leading-relaxed max-w-prose">
                   Key outcomes of our solution’s implementation.
@@ -458,7 +457,7 @@ const CaseStudyAmbientAI = () => {
               </div>
               <div className="space-y-12">
                 <div className="fade-in-section opacity-0 translate-y-6">
-                  <img src={DrPatelImg} alt="Dr. Patel testimonial" className="w-full rounded-2xl shadow-sm" />
+                  <img src={DrPatelImg} alt="Dr. Patel testimonial" className="w-full rounded-2xl shadow-sm" />
                 </div>
                 <div className="fade-in-section opacity-0 translate-y-6" style={{ animationDelay: "0.1s" }}>
                   <img src={JamieLinImg} alt="Jamie Lin testimonial" className="w-full rounded-2xl shadow-sm" />
@@ -486,6 +485,7 @@ const CaseStudyAmbientAI = () => {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
